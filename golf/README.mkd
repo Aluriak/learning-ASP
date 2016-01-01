@@ -1,0 +1,10 @@
+# Codegolf answer
+Here is the [codegolf](http://codegolf.stackexchange.com/questions/44485/score-a-game-of-kingdom-builder), and here is the [answer](http://codegolf.stackexchange.com/a/51777).
+
+Files description:
+- *board* contains the board state.
+- *board2atom.py* is the python program that fill *board.lp* according to *board* content.
+- *board.lp* contains ASP atoms describing the *board* content.
+- *score.lp* contains the ASP rules that computes the scores.
+- *golf.lp* contains the *score.lp* in the golfed version.
+- *countbyte.py* is the python program that gives the byte count.
