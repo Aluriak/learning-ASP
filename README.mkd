@@ -1,0 +1,6 @@
+# ASP learning repository
+Here is many codes and examples that can help for learn [Answer Set Programming](https://en.wikipedia.org/wiki/Answer_set_programming) and related concepts.
+
+Used implementation of *ASP* is [clingo](http://sourceforge.net/projects/potassco/files/clingo/) (at least in 4.5.4) of the [Potassco labs](http://potassco.sourceforge.net/).
+
+All codes here are under [WTFPL](http://www.wtfpl.net/about/).
