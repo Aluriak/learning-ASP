@@ -1,4 +1,5 @@
 CLINGO=~/bin/clingo/clingo
+CLINGO=~/bin/clingo
 
 sevenwonders:
 	$(CLINGO) sevenwonders.lp
@@ -6,3 +7,5 @@ sevenwonders:
 sound:
 	$(CLINGO) sound.lp
 
+sums:
+	$(CLINGO) sums.lp
