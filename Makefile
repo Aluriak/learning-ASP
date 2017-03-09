@@ -9,3 +9,6 @@ sound:
 
 sums:
 	$(CLINGO) sums.lp
+
+ssp:
+	$(CLINGO) ssp_integer.lp -n 0
