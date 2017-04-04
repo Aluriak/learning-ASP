@@ -4,7 +4,7 @@ There is N sets of atoms value/3, as value(N,X,W) where N is the set unique id,
  X is an element unique id and W a weight defined as an integer.
 
 Goal is to compute sums of weight of elements of each set,
- considering or not repeations.
+ considering or not repeatitions.
 *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % score: 8
@@ -15,7 +15,7 @@ value(1,c,3).
 % score: 7
 value(2,d,4).
 value(2,e,1).
-value(2,e,2). % here is a node repeation
+value(2,e,2). % here is a node repeatition
 
 
 % weight associated to each set is the sum of its members, independently of its repeations.
