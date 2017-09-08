@@ -12,3 +12,6 @@ sums:
 
 ssp:
 	$(CLINGO) ssp_integer.lp -n 0
+
+build_pc:
+	$(CLINGO) build-pc.lp -n 0 --parallel-mode=4,split
