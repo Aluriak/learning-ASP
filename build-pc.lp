@@ -15,7 +15,7 @@
 %   model: the engine computing builds
 %
 % Each output model is a build that costs less than the maximal cost.
-% Build are sorted by increasing rating.
+% Builds are sorted by increasing rating.
 *%
 
 #const max_cost=800.
@@ -31,6 +31,8 @@ rate(gpu,"A",10).
 % Another way to write down the info: type, name, price, rate.
 component(gpu,"B",200,7).
 component(gpu,"embedded graphic chipset",0,4).
+% CPU C embeds a graphic card, that *may* be used.
+require(gpu,"embedded graphic chipset",cpu,"C").
 
 component(cpu,"A",400,10).
 component(cpu,"B",150,6).
@@ -110,6 +112,9 @@ minimal_quantity(O,0):- component(O) ; optional(O).
 importance(O,5):- component(O) ; not set_importance(O,_).
 importance(O,I):- component(O) ; set_importance(O,I).
 
+% Embedding is synonymous to symmetric requirement.
+require(C1,N1,C2,N2):- embeds(C1,N1,C2,N2).
+require(C2,N2,C1,N1):- embeds(C1,N1,C2,N2).
 
 
 
