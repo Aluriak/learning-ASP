@@ -14,9 +14,29 @@ import shutil
 import textwrap
 from time import sleep
 from collections import defaultdict
-import colorama  # term colors
-from colorama import Fore, Back
-colorama.init()  # for windows
+try:
+    import colorama  # term colors
+    from colorama import Fore, Back
+    colorama.init()  # for windows
+except ImportError:
+    # emulate colors ; will not work on windows
+    class Fore:
+        RESET = '\033[0m'
+        BLACK='\033[30m'
+        RED='\033[31m'
+        GREEN='\033[32m'
+        BLUE='\033[34m'
+        LIGHTRED='\033[91m'
+        LIGHTGREEN='\033[92m'
+        LIGHTBLUE='\033[94m'
+        WHITE  = '\33[37m'
+    class Back:
+        BLACK='\033[40m'
+        RED='\033[41m'
+        GREEN='\033[42m'
+        BLUE='\033[44m'
+        WHITE='\033[47m'
+        RESET = '\033[0m'
 
 
 SPEED = 0.5
