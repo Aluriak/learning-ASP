@@ -1,0 +1,2 @@
+Encoding of some exercises found at [brilliant.org](https://brilliant.org).
+Some interpretation of the output models may be necessary to get the right answer.
