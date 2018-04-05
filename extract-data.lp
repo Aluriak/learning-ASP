@@ -22,4 +22,4 @@ def read(filename:str):
 #end.
 
 
-p(@read("sound.lp")).
+p(L,N,X):- (L,N,X)=@read("sound.lp").
