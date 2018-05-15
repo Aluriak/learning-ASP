@@ -82,6 +82,7 @@ class ColorPropagator:
             to_print += fore + back + atom + Fore.RESET + Back.RESET + '  '
         print('\n\n' + '\n'.join(textwrap.wrap(to_print, width=TERM_WIDTH)))
         sleep(self.sleep)
+        # input('<?>')
 
 
 def main(prg):
