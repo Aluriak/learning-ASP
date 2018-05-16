@@ -1,0 +1,21 @@
+Sudoku solver.
+
+See the solver encoding in [solve-sudoku.lp](solve-sudoku.lp).
+[solve-sudoku-constraints.lp](solve-sudoku-constraints.lp) provides
+another implementation using constraints.
+
+Some examples of sudoku problems are given in [examples/](examples/).
+Solve one of them using clingo :
+
+    clingo solve-sudoku.lp examples/hard1.lp
+
+The python script [show-sudoku.py](show-sudoku.py) allows you to see examples and solutions, for instance :
+
+    python show-sudoku.py examples/hard1.lp
+
+
+Finally, you can chain the calls to get the solved problem in one command:
+
+    clingo solve-sudoku.lp examples/hard1.lp | python show-sudoku.py - 1
+
+Other recipes can be found in [Makefile](Makefile).
