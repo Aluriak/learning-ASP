@@ -1,0 +1,45 @@
+# Office placement
+Automatic assignation of humans to their desk.
+
+Run with:
+
+    clingo 0 humans.lp offices.lp engine.lp -W no-atom-undefined
+
+
+## DSL
+In files `humans.lp` and `offices.lp`, the final user can specify
+its problem using the DSL.
+
+He should not modify `engine.lp`, that contains the expension of the DSL, and the problem encoding.
+
+### humans
+User can define humans using the `human(agnan,team_01).` expression. Team is here just for some features, like optimization of team mixing.
+
+User can also:
+- place manually peoples at specific places
+- specify that a particular human must be alone in its room
+- declare incompatibilities between peoples
+- declare incompatibilities between peoples and properties
+- declare a property implied by a human on its room
+- declare relations between peoples, that will be later translated into constraints
+- provides some options, to help choose the best assignation of desks.
+
+Few examples:
+- `incompatible(michel,geraldine)`: Michel can't stand Géraldine
+- `imply(cunegonde,cold)`: Cunégonde makes its room cold (by opening the window, even in winter)
+- `friend(gislaine,roger)`: Gislaine is friend with Roger
+- `incompatible(eugene,sunny)`: Eugène can't be in a sunny room
+
+### desk
+User can work either at room or desk level, or a mix of the two.
+He will define rooms and desks as shown in [`offices.lp`](offices.lp),
+for instance with `room(a100,2)` indicating that room a100 can contains two humans.
+
+Rooms and/or desks can also hold arbitrary properties. Some typical
+properties may be *sunny*, *south-oriented* or *noisy*. For instance, `property(a100,sunny)` defines room a100 as *sunny*, making it unsuitable for Eugène.
+
+
+
+## Future work
+- implement the team mixing optimization
+- #project for non-differenciated desks
