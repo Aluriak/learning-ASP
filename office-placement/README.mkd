@@ -1,5 +1,6 @@
 # Office placement
 Automatic assignation of humans to their desk.
+See [Cathplace](https://github.com/Aluriak/Cathplace) project for more features and interfaces.
 
 Run with:
 
