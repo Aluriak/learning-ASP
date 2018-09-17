@@ -15,10 +15,41 @@
 #const board_length=250.
 
 % Data, giving the size of each stair uid.
-stair(1,100).  % uid, size
-stair(2,50).
-stair(3,150).
-stair(4,120).
+stair(1,81).  % uid, size
+stair(2,76).
+stair(3,76).
+stair(4,77).
+stair(5,78).
+stair(6,79).
+stair(7,83).
+stair(8,85).
+stair(9,88).
+stair(10,86).
+stair(11,74).
+stair(12,73).
+stair(13,79).
+stair(14,92).
+stair(15,107).
+stair(16,92).
+stair(17,78).
+stair(18,80).
+stair(19,84).
+stair(20,81).
+stair(21,89).
+stair(22,101).
+stair(23,121).
+stair(24,92).
+stair(25,83).
+stair(26,79).
+stair(27,71).
+stair(28,66).
+stair(29,71).
+stair(30,82).
+stair(31,111).
+stair(32,106).
+stair(33,86).
+stair(34,82).
+
 
 
 % Define how many boards to use.
