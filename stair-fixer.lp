@@ -7,11 +7,24 @@
 %  (add --opt-mode=optN to get all optimal models)
 %  (constants can be changed with -c maxboards=6 for instance)
 % Note: it's basically a knapsack problem.
-#show.
-#show total_diff/1.
-#show cutinboard(L,S): usefor(L,S).
 
-#const maxboards=3.
+% Question : how much this program saved us wood ?
+%  Answer can be given by a program simulating a human approach: find some 2 or 3-uplet of stairs that together are equal or close to board size. Cut them.
+%  Repeat until no uplet exists. Cut remainings in other boards in a greedy approach.
+
+#show.
+#show setsize(S,Z): subset_size(S,Z).
+#show cutinboard(L,S): usefor(L,S).
+#show nb_boards/1.
+#show diff_size/2.
+#show total_diff/1.
+% #show minimal_board_number/1.
+
+% Maximal number of boards to use
+% NOTE: an initial safe number is 34, the number of stairs.
+% NOTE: manual multi-shot solving narrow solution to at most 9 boards.
+% NOTE: run with 8 will yield no model in 1 hour of search, suggesting that this instance is not solvable with only 8 boards.
+#const maxboards=9.
 #const board_length=250.
 
 % Data, giving the size of each stair uid.
@@ -50,20 +63,32 @@ stair(32,106).
 stair(33,86).
 stair(34,82).
 
+% Determine how many boards needs to be used.
+total_stair_size(Z):- Z=#sum{Cm: stair(_,Cm)}.
+minimal_board_number(B)  :- total_stair_size(Z) ; B = Z / board_length ; 0=Z\board_length.
+minimal_board_number(B+1):- total_stair_size(Z) ; B = Z / board_length ; 0<Z\board_length.
 
+% Determine the maximal number of stair one can cut in a single board.
+max_stair_per_board(Min):- Size=#min{L:stair(_,L)} ; Min=1+board_length/Size.  % 4 in this instance
 
 % Define how many boards to use.
-0{subset(1)}1.
-0{subset(N+1)}1:- subset(N) ; N<maxboards.
+1{nb_boards(B..maxboards)}1 :- minimal_board_number(B).
+subset(1..X):- nb_boards(X).
+#minimize{B:nb_boards(B)}.
 
 % Assign each stair to a board.
-1{usefor(L,S): subset(S)}1 :- stair(L,_).
+1 { usefor(L,S): subset(S) } 1 :- stair(L,_).
+% Assign at most 4 stairs to each board.
+1 { usefor(L,S): stair(L,_) } MS :- subset(S) ; max_stair_per_board(MS).
 
 % Compute the total used size of the board and prevent using more than available.
-subset_size(S,Z):- Z=#sum{Cm: stair(L,Cm), usefor(L,S)} ; subset(S).
+subset_size(S,Z):- subset(S) ; Z=#sum{Cm: stair(L,Cm), usefor(L,S)}.
 :- subset_size(_,Z) ; Z>board_length.
 
 % Minimize the remainings of the used boards.
+%  Will explode memory, especially total_diff/1.
+%  See https://lucas.bourneuf.net/blog/asp-encodings.html for explanations
 diff_size(S,D):- subset_size(S,Z) ; D=board_length-Z.
-total_diff(T):- T=#sum{D: diff_size(_,D)}.
-#minimize{D:total_diff(D)}.
+#minimize{D,S: diff_size(S,D)}.
+% total_diff(T):- T=#sum{D: diff_size(_,D)}.
+% #minimize{D,2: total_diff(D)}.
