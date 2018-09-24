@@ -64,7 +64,7 @@ stair(33,86).
 stair(34,82).
 
 % Determine how many boards needs to be used.
-total_stair_size(Z):- Z=#sum{Cm: stair(_,Cm)}.
+total_stair_size(Z):- Z=#sum{Cm,L: stair(L,Cm)}.
 minimal_board_number(B)  :- total_stair_size(Z) ; B = Z / board_length ; 0=Z\board_length.
 minimal_board_number(B+1):- total_stair_size(Z) ; B = Z / board_length ; 0<Z\board_length.
 
@@ -82,7 +82,7 @@ subset(1..X):- nb_boards(X).
 1 { usefor(L,S): stair(L,_) } MS :- subset(S) ; max_stair_per_board(MS).
 
 % Compute the total used size of the board and prevent using more than available.
-subset_size(S,Z):- subset(S) ; Z=#sum{Cm: stair(L,Cm), usefor(L,S)}.
+subset_size(S,Z):- subset(S) ; Z=#sum{Cm,L: stair(L,Cm), usefor(L,S)}.
 :- subset_size(_,Z) ; Z>board_length.
 
 % Minimize the remainings of the used boards.
@@ -90,5 +90,5 @@ subset_size(S,Z):- subset(S) ; Z=#sum{Cm: stair(L,Cm), usefor(L,S)}.
 %  See https://lucas.bourneuf.net/blog/asp-encodings.html for explanations
 diff_size(S,D):- subset_size(S,Z) ; D=board_length-Z.
 #minimize{D,S: diff_size(S,D)}.
-% total_diff(T):- T=#sum{D: diff_size(_,D)}.
+% total_diff(T):- T=#sum{D,S: diff_size(S,D)}.
 % #minimize{D,2: total_diff(D)}.
